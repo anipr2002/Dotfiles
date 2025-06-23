@@ -1,15 +1,11 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 eval "$(starship init zsh)"
-# Path to your Oh My Zsh installation.
-source ~/.local/share/omakub/defaults/bash/aliases
 plugins=(git)
 
 # Shell integrations
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # source /usr/share/doc/fzf/examples/key-bindings.zsh
-
-eval "$(zoxide init --cmd cd zsh)"
 
 # Aliases
 alias dd="clear"
@@ -25,18 +21,13 @@ alias sl='source install/local_setup.zsh'
 
 export EDITOR="nvim"
 export SUDO_EDITOR="$EDITOR"
-. "$HOME/.cargo/env"
 
 export PATH=$PATH:/home/anipr2002/.spicetify
-source /opt/ros/jazzy/setup.zsh
-
-
-source /home/anipr2002/CODE/ROS_WS/ros_ws/install/local_setup.zsh
-
 
 bindkey -e
 bindkey '^p' History-search-backword
 bindkey '^n' History-search-forword
+
 # History
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
@@ -49,13 +40,10 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-if command -v zoxide &> /dev/null; then
-  eval "$(zoxide init zsh)"
-fi
-
-
-# Load zsh-completions
-autoload -U compinit && compinit
+# Zoxide initialization - Zinit might also handle this, but keeping it explicit
+# if command -v zoxide &> /dev/null; then
+#   eval "$(zoxide init zsh)"
+# fi
 
 
 ### Added by Zinit's installer
@@ -82,13 +70,14 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 
 
-#Zinit
+#Zinit plugins
 zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-completions # This will handle completions, so remove the manual `compinit`
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
+zinit light zoxide/zoxide # Let Zinit manage zoxide for better integration
 
-#ZSTYLE
+# ZSTYLE
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
@@ -109,4 +98,6 @@ esac
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-source ~/.nvm/nvm.sh
+
+# Created by `pipx` on 2025-06-23 12:13:55
+export PATH="$PATH:/home/anipr2002/.local/bin"
