@@ -9,7 +9,7 @@ plugins=(git)
 
 # Aliases
 alias dd="clear"
-alias ls="eza --icons --group-directories-first"
+# alias ls="eza --icons --group-directories-first"
 alias ll="eza --icons --group-directories-first -l"
 
 alias ze='function _ze() { if [ $# -eq 0 ]; then zellij; else zellij attach "$1"; fi; }; _ze'
@@ -18,6 +18,14 @@ alias zc='_zc() { SESSION=$(gum input --placeholder "Enter new session name"); z
 
 alias ss='source install/setup.zsh'
 alias sl='source install/local_setup.zsh'
+
+alias ls='eza -lh --group-directories-first --icons=auto'
+alias lsa='ls -a'
+alias lt='eza --tree --level=2 --long --icons --git'
+alias lta='lt -a'
+alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
+alias fd='fdfind'
+alias cd='z'
 
 export EDITOR="nvim"
 export SUDO_EDITOR="$EDITOR"
@@ -75,7 +83,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions # This will handle completions, so remove the manual `compinit`
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
-zinit light zoxide/zoxide # Let Zinit manage zoxide for better integration
+# zinit light zoxide/zoxide # Let Zinit manage zoxide for better integration
 
 # ZSTYLE
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -101,3 +109,4 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Created by `pipx` on 2025-06-23 12:13:55
 export PATH="$PATH:/home/anipr2002/.local/bin"
+eval "$(zoxide init zsh)"
